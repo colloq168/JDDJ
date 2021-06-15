@@ -24,3 +24,10 @@ jobs:
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
       - name: Upload
         run: git checkout main && coscmd upload -rs --delete -f ./ / --ignore "./.git/*"
+      - name: Delete Workflow Runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+         token: ${{ github.token }}
+         repository: ${{ github.repository }}
+         retain_days: 1
+         keep_minimum_runs: 0
